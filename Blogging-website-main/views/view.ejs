@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600&display=swap" rel="stylesheet">
+    <% if (posts.length === 0) { %>
+        <link rel="stylesheet" href="/css/editor.css">
+    <% } else { %>
+        <link rel="stylesheet" href="/css/styles.css">
+    <% } %>
+    <title>Editor</title>
+</head>
+<body>
+    <% if (posts.length === 0) { %>
+        <h1 style="text-align: center;">There are no posts yet...<br /> It's time to write something📕🖊️</h1>
+        <a href="/new" class="button">Write a Blog</a>
+    <% } else { %>
+        <% posts.forEach(post => { %>
+            <div>
+                <h2><%= post.title %></h2>
+                <p><%= post.content %></p>
+                <a href="/posts/edit/<%= post.id %>">Edit</a>
+                <form action="/posts/delete/<%= post.id %>" method="POST">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        <% }) %>
+    <% } %>
+</body>
+</html>
